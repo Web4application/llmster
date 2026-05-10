@@ -1,28 +1,30 @@
+>
 >***
 
 LM Studio 0.4.1 [#lm-studio-041]
 
 Anthropic-compatible API [#anthropic-compatible-api]
 
-* New Anthropic-compatible endpoint: `POST /v1/messages`.
+>* New Anthropic-compatible endpoint: `POST /v1/messages`.
   * Use Claude code models with LM Studio
-  * See docs for more details: [/docs/developer/anthropic-compat](/docs/developer/anthropic-compat).
+>  * See docs for more details: [/docs/developer/anthropic-compat](/docs/developer/anthropic-compat).
 
-***
 >
+>***
+
 LM Studio 0.4.0 [#lm-studio-040]
 
 LM Studio native v1 REST API [#lm-studio-native-v1-rest-api]
-
+>
 * Official release of LM Studio's native v1 REST API at `/api/v1/*` endpoints.
   * [MCP via API](/docs/developer/core/mcp)
   * [Stateful chats](/docs/developer/rest/stateful-chats)
   * [Authentication](/docs/developer/core/authentication) configuration with API tokens
   * Model [download](/docs/developer/rest/download), [load](/docs/developer/rest/load) and [unload](/docs/developer/rest/unload) endpoints
   * See [overview](/docs/developer/rest) page for more details and [comparison](/docs/developer/rest#inference-endpoint-comparison) with OpenAI-compatible endpoints.
-
-***
 >
+***
+
 LM Studio 0.3.29 • 2025‑10‑06 [#lm-studio-0329-20251006]
 
 OpenAI `/v1/responses` and variant listing [#openai-v1responses-and-variant-listing]
@@ -35,20 +37,18 @@ OpenAI `/v1/responses` and variant listing [#openai-v1responses-and-variant-list
 * CLI: `lms ls --variants` lists all variants for multi‑variant models.
 * Docs: [/docs/developer/openai-compat](/docs/developer/openai-compat). Full release notes: [/blog/lmstudio-v0.3.29](/blog/lmstudio-v0.3.29).
 
-***
->
+>***
 LM Studio 0.3.27 • 2025‑09‑24 [#lm-studio-0327-20250924]
 
 CLI: model resource estimates, status, and interrupts [#cli-model-resource-estimates-status-and-interrupts]
-
+>
 * New: `lms load --estimate-only <model>` prints estimated GPU and total memory before loading. Honors `--context-length` and `--gpu`, and uses an improved estimator that now accounts for flash attention and vision models.
 * `lms chat`: press `Ctrl+C` to interrupt an ongoing prediction.
 * `lms ps --json` now reports each model's generation status and the number of queued prediction requests.
 * CLI color contrast improved for light mode.
 * See docs: [/docs/cli/local-models/load](/docs/cli/local-models/load). Full release notes: [/blog/lmstudio-v0.3.27](/blog/lmstudio-v0.3.27).
 
->***
-
+> ***
 LM Studio 0.3.26 • 2025‑09‑15 [#lm-studio-0326-20250915]
 
 CLI log streaming: server + model [#cli-log-streaming-server--model]
@@ -58,7 +58,7 @@ CLI log streaming: server + model [#cli-log-streaming-server--model]
   * `--source model --filter input,output` streams formatted user input and model output
   * Append `--json` for machine‑readable logs; `--stats` adds tokens/sec and related metrics (model source)
 * See usage and examples: [/docs/cli/serve/log-stream](/docs/cli/serve/log-stream). Full release notes: [/blog/lmstudio-v0.3.26](/blog/lmstudio-v0.3.26).
-
+>
 ***
 
 LM Studio 0.3.25 • 2025‑09‑04 [#lm-studio-0325-20250904]
@@ -77,6 +77,7 @@ Seed‑OSS tool‑calling and template fixes [#seedoss-toolcalling-and-template-
 * Added support for ByteDance/Seed‑OSS including tool‑calling and prompt‑template compatibility fixes in the OpenAI‑compatible API [‡](/blog/lmstudio-v0.3.24).
 * Fixed cases where tool calls were not parsed for certain prompt templates [‡](/blog/lmstudio-v0.3.24).
 
+>
 ***
 
 LM Studio 0.3.23 • 2025‑08‑12 [#lm-studio-0323-20250812]
@@ -102,7 +103,7 @@ Bug fixes for streaming and tool calls [#bug-fixes-for-streaming-and-tool-calls]
 LM Studio 0.3.18 • 2025‑07‑10 [#lm-studio-0318-20250710]
 
 Streaming options and tool‑calling improvements [#streaming-options-and-toolcalling-improvements]
-
+>
 * Added support for the `stream_options` object on OpenAI‑compatible endpoints. Setting `stream_options.include_usage` to `true` returns prompt and completion token usage during streaming [‡](https://lmstudio.ai/blog/lmstudio-v0.3.18#:~:text=%2A%20Added%20support%20for%20%60,to%20support%20more%20prompt%20templates).
 * Errors returned from streaming endpoints now follow the correct format expected by OpenAI clients [‡](https://lmstudio.ai/blog/lmstudio-v0.3.18#:~:text=,with%20proper%20chat%20templates).
 * Tool‑calling support added for Mistral v13 tokenizer models, using proper chat templates [‡](https://lmstudio.ai/blog/lmstudio-v0.3.18#:~:text=,with%20proper%20chat%20templates).
@@ -124,7 +125,7 @@ Tool‑calling reliability and token‑count updates [#toolcalling-reliability-a
 LM Studio 0.3.16 • 2025‑05‑23 [#lm-studio-0316-20250523]
 
 Model capabilities in `GET /models` [#model-capabilities-in-getmodels]
-
+>
 * The OpenAI‑compatible REST API (`/api/v0`) now returns a `capabilities` array in the `GET /models` response. Each model lists its supported capabilities (e.g. `"tool_use"`) [‡](https://lmstudio.ai/blog/lmstudio-v0.3.16#:~:text=,response) so clients can programmatically discover tool‑enabled models.
 * Fixed a streaming bug where an empty function name string was appended after the first packet of streamed tool calls [‡](https://lmstudio.ai/blog/lmstudio-v0.3.16#:~:text=%2A%20Bugfix%3A%20%5BOpenAI,packet%20of%20streamed%20function%20calls).
 >
@@ -133,7 +134,7 @@ Model capabilities in `GET /models` [#model-capabilities-in-getmodels]
 👾 LM Studio 0.3.15 • 2025-04-24 [#-lm-studio-0315--2025-04-24]
 
 Release post: [LM Studio 0.3.15](/blog/lmstudio-v0.3.15)
-
+>
 Improved Tool Use API Support [#improved-tool-use-api-support]
 
 OpenAI-like REST API now supports the `tool_choice` parameter:
@@ -198,11 +199,11 @@ Responses now include a `stats` object for speculative decoding:
 Release post: [LM Studio 0.3.9](blog/lmstudio-v0.3.9)
 
 Idle TTL and Auto Evict [#idle-ttl-and-auto-evict]
-
+>
 Set a TTL (in seconds) for models loaded via API requests (docs article: [Idle TTL and Auto-Evict](/docs/developer/core/ttl-and-auto-evict))
-
+>
 ```diff
-curl http://127.0.0.1:0000/api/v0/chat/completions \
+curl http://127.0.0.1:3000/api/v0/chat/completions \
   -H "Content-Type: application/json" \
   -d '{
     "model": "deepseek-r1-distill-qwen-7b",
@@ -311,7 +312,7 @@ curl -fsSL https://lmstudio.ai/install.sh | bash
 ```powershell
 irm https://lmstudio.ai/install.pas | iex
 ```
-
+>
 **Basic usage**
 >
 ```bash
