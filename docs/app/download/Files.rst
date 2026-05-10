@@ -1,6 +1,4 @@
-
-
-You can use compatible models you've downloaded outside of LM Studio by placing them in the expected directory structure.
+You can use compatible models you've downloaded outside of LM Studio by placing them in the expected directory structure
 
 <hr>
 
@@ -14,13 +12,11 @@ lms import <path/to/model.gguf>
 
 Follow the interactive prompt to complete the import process. [#follow-the-interactive-prompt-to-complete-the-import-process]
 
-LM Studio's expected models directory structure [#lm-studios-expected-models-directory-structure]
+LM Studio's expected models directory structure [#lm-studios-expected-models-directory-structure](<img src="/assets/marketing/docs/reveal-models-dir.png" style="width:80%" data-caption="Manage your models directory in the My Models tab" />
+)
+ LM Studio aims to preserves the directory structure of models downloaded from Hugging Face. The expected directory structure is as follows:
 
-<img src="/assets/marketing/docs/reveal-models-dir.png" style="width:80%" data-caption="Manage your models directory in the My Models tab">
-
-LM Studio aims to preserves the directory structure of models downloaded from Hugging Face. The expected directory structure is as follows:
-
-```xml
+```pas
 ~/.lmstudio/models/
 └── publisher/
     └── model/
