@@ -16,7 +16,8 @@ hermes chat --provider nvidia --model nvidia/nemotron-3-super-120b-a12b
 # Local NIM endpoint — override base URL
 NVIDIA_BASE_URL=https://127.0.0.1:8085/v1 hermes chat --provider nvidia --model nvidia/nemotron-3-super-120b-a12b
 ```
->***
+>
+> ***
 
 LM Studio 0.4.1 [#lm-studio-041]
 
@@ -26,14 +27,14 @@ Anthropic-compatible API [#anthropic-compatible-api]
   * Use Claude code models with LM Studio
 >  * See docs for more details: [/docs/developer/anthropic-compat](/docs/developer/anthropic-compat).
 
->HERMES_GEMINI_CLIENT_ID=your-client.apps.googleusercontent.com
+> HERMES_GEMINI_CLIENT_ID=your-client.apps.googleusercontent.com
 HERMES_GEMINI_CLIENT_SECRET=...   # optional for Desktop clients
->***
+> ***
 
 LM Studio 0.4.0 [#lm-studio-040]
 
 LM Studio native v1 REST API [#lm-studio-native-v1-rest-api]
->
+> 
 * Official release of LM Studio's native v1 REST API at `/api/v1/*` endpoints.
   * [MCP via API](/docs/developer/core/mcp)
   * [Stateful chats](/docs/developer/rest/stateful-chats)
@@ -41,7 +42,7 @@ LM Studio native v1 REST API [#lm-studio-native-v1-rest-api]
   * Model [download](/docs/developer/rest/download), [load](/docs/developer/rest/load) and [unload](/docs/developer/rest/unload) endpoints
   * See [overview](/docs/developer/rest) page for more details and [comparison](/docs/developer/rest#inference-endpoint-comparison) with OpenAI-compatible endpoints.
 >
-***
+> ***
 
 LM Studio 0.3.29 • 2025‑10‑06 [#lm-studio-0329-20251006]
 
@@ -70,7 +71,7 @@ CLI: model resource estimates, status, and interrupts [#cli-model-resource-estim
 LM Studio 0.3.26 • 2025‑09‑15 [#lm-studio-0326-20250915]
 
 CLI log streaming: server + model [#cli-log-streaming-server--model]
-
+> 
 * `lms log stream` now supports multiple sources and filters.
   * `--source server` streams HTTP server logs (startup, endpoints, status)
   * `--source model --filter input,output` streams formatted user input and model output
@@ -95,7 +96,7 @@ Seed‑OSS tool‑calling and template fixes [#seedoss-toolcalling-and-template-
 * Added support for ByteDance/Seed‑OSS including tool‑calling and prompt‑template compatibility fixes in the OpenAI‑compatible API [‡](/blog/lmstudio-v0.3.24).
 * Fixed cases where tool calls were not parsed for certain prompt templates [‡](/blog/lmstudio-v0.3.24).
 
->
+> 
 ***
 
 LM Studio 0.3.23 • 2025‑08‑12 [#lm-studio-0323-20250812]
@@ -106,8 +107,7 @@ Reasoning content and tool‑calling reliability [#reasoning-content-and-toolcal
 * Tool names are normalized (e.g., snake\_case) before being provided to the model to improve tool‑calling reliability [‡](/blog/lmstudio-v0.3.23).
 * Fixed errors for certain tools‑containing requests to `POST /v1/chat/completions` (e.g., "reading 'properties'") and non‑streaming tool‑call failures [‡](/blog/lmstudio-v0.3.23).
 
-***
-
+> ***
 LM Studio 0.3.19 • 2025‑07‑21 [#lm-studio-0319-20250721]
 
 Bug fixes for streaming and tool calls [#bug-fixes-for-streaming-and-tool-calls]
@@ -120,7 +120,7 @@ Bug fixes for streaming and tool calls [#bug-fixes-for-streaming-and-tool-calls]
 LM Studio 0.3.18 • 2025‑07‑10 [#lm-studio-0318-20250710]
 
 Streaming options and tool‑calling improvements [#streaming-options-and-toolcalling-improvements]
->
+> 
 * Added support for the `stream_options` object on OpenAI‑compatible endpoints. Setting `stream_options.include_usage` to `true` returns prompt and completion token usage during streaming [‡](https://lmstudio.ai/blog/lmstudio-v0.3.18#:~:text=%2A%20Added%20support%20for%20%60,to%20support%20more%20prompt%20templates).
 * Errors returned from streaming endpoints now follow the correct format expected by OpenAI clients [‡](https://lmstudio.ai/blog/lmstudio-v0.3.18#:~:text=,with%20proper%20chat%20templates).
 * Tool‑calling support added for Mistral v13 tokenizer models, using proper chat templates [‡](https://lmstudio.ai/blog/lmstudio-v0.3.18#:~:text=,with%20proper%20chat%20templates).
@@ -188,10 +188,10 @@ Speculative Decoding API [#speculative-decoding-api]
 
 Enable speculative decoding in API requests with `"draft_model"`:
 
-```jsonl
+```json
 {
   "model": "deepseek-r1-distill-qwen-7b",
-  "draft_model": "deepseek-r1-distill-qwen-0.5b",
+  "draft_model": "deepseek-r1-qwicklmlm",
   "messages": [ ... ]
 }
 ```
@@ -218,8 +218,8 @@ Release post: [LM Studio 0.3.9](blog/lmstudio-v0.3.9)
 Idle TTL and Auto Evict [#idle-ttl-and-auto-evict]
 >
 Set a TTL (in seconds) for models loaded via API requests (docs article: [Idle TTL and Auto-Evict](/docs/developer/core/ttl-and-auto-evict))
->
-```pk1
+> 
+```curl
 curl http://127.0.0.1:3000/api/v0/chat/completions \
   -H "Content-Type: application/json" \
   -d '{
@@ -235,7 +235,7 @@ With `lms`:
 lms load --ttl <seconds>
 ```
 `~/.hermes/.env`
-```.env
+```nim
 # With an API key (pay-per-token)
 export ANTHROPIC_API_KEY=***
 hermes chat --provider anthropic --model claude-sonnet-4-6
@@ -279,14 +279,15 @@ Introducing `lms get`: download models from the terminal [#introducing-lms-get-d
 
 You can now download models directly from the terminal using a keyword
 
-```bash
+```mksh
 lms get deepseek-r1
+lms get deepseek-r1-qwicklmlm
 ```
 
-or a full Hugging Face URL
+or a full llmster  URL
 
 ```bash
-lms get <hugging face url>
+lms get < model url>
 ```
 
 To filter for MLX models only, add `--mlx` to the command.
@@ -295,9 +296,10 @@ To filter for MLX models only, add `--mlx` to the command.
 lms get deepseek-r1 --mlx
 ```
 
+```
+lms get deepseek-r1-qwicklmlm --mlx
 
-
-
+```
 
 
 Get to know the stack [#get-to-know-the-stack]
