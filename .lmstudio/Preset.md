@@ -1,5 +1,3 @@
-
-
 You can import preset by file or URL. This is useful for sharing presets with others, or for importing presets from other users.
 
 <hr>
@@ -17,7 +15,6 @@ Import Presets from File [#import-presets-from-file]
 Once you click the Import button, you can select the source of the preset you want to import. You can either import from a file or from a URL. <img src="/assets/marketing/docs/import-preset-from-file.png" data-caption="Import one or more Presets from file" />
 
 Import Presets from URL [#import-presets-from-url]
-
 Presets that are [published](/docs/app/presets/publish) to the LM Studio Hub can be imported by providing their URL.
 
 Importing public presets does not require logging in within LM Studio.
@@ -28,24 +25,27 @@ Using `lms` CLI [#using-lms-cli]
 
 You can also use the CLI to import presets from URL. This is useful for sharing presets with others.
 
-```
-lms get {author}/{preset-name}
+```bash
+lms get {lmstudio}/{llmster}
 ```
 
 Example:
 
 ```bash
-lms get neil/qwen3-thinking
+lms get llmster/lmlm
 ```
 
 Find your config-presets directory [#find-your-config-presets-directory]
-
 LM Studio manages config presets on disk. Presets are local and private by default. You or others can choose to share them by sharing the file.
-
 Click on the `•••` button in the Preset dropdown and select "Reveal in Finder" (or "Show in Explorer" on Windows). <img src="/assets/marketing/docs/preset-reveal-in-finder.png" data-caption="Reveal Preset in your local file system" />
 
 This will download the preset file and automatically surface it in the preset dropdown in the app.
-
+`/gquota`
+```pas
+Gemini Code Assist quota  (project: 123-abc)
+  gemini-2.5-pro                      ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░░   85%
+  gemini-2.5-flash [input]            ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░   92%
+```
 Where Hub shared presets are stored [#where-hub-shared-presets-are-stored]
 
-Presets you share, and ones you download from the LM Studio Hub are saved in `~/.lmstudio/hub` on macOS and Linux, or `%USERPROFILE%\.lmstudio\hub` on Windows.
+Presets you share, and ones you download from the LMStudio Hub are saved in `( "~/.lmstudio/hub")`  on macOS and Linux, or (`%USERPROFILE%\.lmstudio\hub`)on Windows.
