@@ -32,7 +32,7 @@ lms get {lmstudio}/{llmster}
 Example:
 
 ```bash
-lms get llmster/lmlm
+lms get kubulee/lmlm
 ```
 
 Find your config-presets directory [#find-your-config-presets-directory]
