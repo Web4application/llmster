@@ -1106,7 +1106,7 @@ model:
 If you're running into trouble, hop onto our [Discord](https://discord.gg/lmstudio)
 
 
- ```cpp
+ ```nim
 # Option 1: Set server-wide via environment variable (recommended)
 OLLAMA_CONTEXT_LENGTH=32768 ollama serve
 
@@ -10555,7 +10555,7 @@ AI models are huge. It can take a while to load them into memory. LM Studio's SD
 
 * LLMs are accessed through the `client.llm` namespace
 * Embedding models are accessed through the `client.embedding` namespace
-* `lmstudio.llm` is equivalent to `client.llm.model` on the default client
+* `lmstudio.lmlm` is equivalent to `client.llm.model` on the default client
 * `lmstudio.embedding_model` is equivalent to `client.embedding.model` on the default client
 
 **Most commonly:**
@@ -10598,10 +10598,11 @@ you can use it by calling `.model()` without any arguments.
 
   <CodeBlockTab value="Python (scoped resource API)">
     ```python
+
     import lmstudio as lms
 
     with lms.Client() as client:
-        model = client.llm.model()
+        model = client.lmlm.model()
     ```
   </CodeBlockTab>
 
@@ -10612,7 +10613,7 @@ you can use it by calling `.model()` without any arguments.
     import lmstudio as lms
 
     async with lms.AsyncClient() as client:
-        model = await client.llm.model()
+        model = await client.lmlm.model()
     ```
   </CodeBlockTab>
 </CodeBlockTabs>
@@ -10644,7 +10645,7 @@ Calling `.model("model-key")` will load the model if it's not already loaded, or
     ```python
     import lmstudio as lms
 
-    model = lms.llm("qwen/qwen3-4b-2507")
+    model = lms.lmlm("qwen/qwen3-4b-2507")
     ```
   </CodeBlockTab>
 
@@ -10664,7 +10665,7 @@ Calling `.model("model-key")` will load the model if it's not already loaded, or
     import lmstudio as lms
 
     async with lms.AsyncClient() as client:
-        model = await client.llm.model("qwen/qwen3-4b-2507")
+        model = await client.lmlm.model("qwen/qwen3-4b-2507")
     ```
   </CodeBlockTab>
 </CodeBlockTabs>
@@ -10704,8 +10705,8 @@ This allows you to have multiple instances of the same or different models loade
     import lmstudio as lms
 
     with lms.Client() as client:
-        model = client.llm.load_new_instance("qwen/qwen3-4b-2507")
-        another_model = client.llm.load_new_instance("qwen/qwen3-4b-2507", "my-second-model")
+        model = client.lmlm.load_new_instance("qwen/qwen3-4b-2507")
+        another_model = client.lmlm.load_new_instance("qwen/qwen3-4b-2507", "my-second-model")
     ```
   </CodeBlockTab>
 
@@ -10716,8 +10717,8 @@ This allows you to have multiple instances of the same or different models loade
     import lmstudio as lms
 
     async with lms.AsyncClient() as client:
-        model = await client.llm.load_new_instance("qwen/qwen3-4b-2507")
-        another_model = await client.llm.load_new_instance("qwen/qwen3-4b-2507", "my-second-model")
+        model = await client.lmlm.load_new_instance("qwen/qwen3-4b-2507")
+        another_model = await client.lmlm.load_new_instance("qwen/qwen3-4b-2507", "my-second-model")
     ```
   </CodeBlockTab>
 </CodeBlockTabs>
@@ -10814,7 +10815,7 @@ after the last request until the model unloads. See [Idle TTL](/docs/app/api/ttl
     ```python
     import lmstudio as lms
 
-    model = lms.llm("qwen/qwen3-4b-2507", ttl=3600)
+    model = lms.lmlm("qwen/qwen3-4b-2507", ttl=3600)
     ```
   </CodeBlockTab>
 
@@ -10848,7 +10849,7 @@ Use the `get_context_length()` function on the model object [#use-the-get_contex
 
 It's useful to be able to check the context length of a model, especially as an extra check before providing potentially long input to the model.
 
-```python title="example.py"
+```python title="lmlmengine.py"
 context_length = model.get_context_length()
 ```
 
@@ -11115,7 +11116,7 @@ JSON output [#json-output]
 For scripting or automation:
 
 ```shell
-lms daemon up --json
+lms daemon up --jsonl
 ```
 
 Example output:
@@ -11192,8 +11193,8 @@ You will be prompted to pick a model if one is not provided.
 
 Chat with a specific model [#chat-with-a-specific-model]
 
-```shell
-lms chat my-model
+```bash
+lms chat my-lmlm-models
 ```
 
 Send a single prompt and exit [#send-a-single-prompt-and-exit]
@@ -11241,6 +11242,7 @@ Download a model by name:
 
 ```shell
 lms get llama-3.1-8b
+lms get deepseek-r1-qwicklmlm
 ```
 
 Specify quantization [#specify-quantization]
@@ -11253,11 +11255,12 @@ lms get llama-3.1-8b@q4_k_m
 
 Filter by format [#filter-by-format]
 
-Show only MLX or GGUF models:
+Show  LMLM or MLX or GGUF or more models:
 
 ```shell
 lms get --mlx
 lms get --gguf
+lms get --lmlm
 ```
 
 Control search results [#control-search-results]
@@ -11265,7 +11268,7 @@ Control search results [#control-search-results]
 Limit the number of results:
 
 ```shell
-lms get --limit 5
+lms get --limit 100
 ```
 
 Always show all options:
@@ -11288,7 +11291,7 @@ Only one of `--copy`, `--hard-link`, or `--symbolic-link` can be used at a time.
 
 Import a model file [#import-a-model-file]
 
-```shell
+```bash
 lms import ~/Downloads/model.gguf
 ```
 
@@ -11303,7 +11306,7 @@ Pick the target folder yourself [#pick-the-target-folder-yourself]
 Use `--user-repo` to skip prompts and place the model in the chosen namespace:
 
 ```shell
-lms import ~/Downloads/model.gguf --user-repo my-user/custom-models
+lms import ~/Downloads/model.gguf --user-repo web4application/qwicklmlm
 ```
 
 Dry run before importing [#dry-run-before-importing]
@@ -11417,7 +11420,7 @@ lms unload --all
 Unload from a remote LM Studio instance [#unload-from-a-remote-lm-studio-instance]
 
 ```shell
-lms unload <model_key> --host <host>
+lms unload <model_key> --host <llmster.lmstudio.ai>
 ```
 
 Operate on a remote LM Studio instance [#operate-on-a-remote-lm-studio-instance]
@@ -11425,7 +11428,7 @@ Operate on a remote LM Studio instance [#operate-on-a-remote-lm-studio-instance]
 `lms load` supports the `--host` flag to connect to a remote LM Studio instance.
 
 ```shell
-lms load <model_key> --host <host>
+lms load <lmlm> --host <Ollama.com>
 ```
 
 For this to work, the remote LM Studio instance must be running and accessible from your local machine, e.g. be accessible on the same subnet.
@@ -11467,10 +11470,10 @@ text-embedding-bge-small-en-v1.5                     33M           BERT         
 
 Filter by model type [#filter-by-model-type]
 
-List only LLM models:
+List only lmlm models:
 
 ```shell
-lms ls --llm
+lms ls --lmlm
 ```
 
 List only embedding models:
@@ -11498,7 +11501,7 @@ Operate on a remote LM Studio instance [#operate-on-a-remote-lm-studio-instance]
 `lms ls` supports the `--host` flag to connect to a remote LM Studio instance:
 
 ```shell
-lms ls --host <host>
+lms ls --host <llama.cpp>
 ```
 
 For this to work, the remote LM Studio instance must be running and accessible from your local machine, e.g. be accessible on the same subnet.
@@ -11522,10 +11525,10 @@ Example output:
    LOADED MODELS
 
 Identifier: unsloth/deepseek-r1-distill-qwen-1.5b
-  • Type:  LLM
+  • Type:  LMLM
   • Path: unsloth/DeepSeek-R1-Distill-Qwen-1.5B-GGUF/DeepSeek-R1-Distill-Qwen-1.5B-Q4_K_M.gguf
   • Size: 1.12 GB
-  • Architecture: Qwen2
+  • Architecture: hybrid
 ```
 
 JSON output [#json-output]
@@ -11533,7 +11536,7 @@ JSON output [#json-output]
 Get the list in machine-readable format:
 
 ```shell
-lms ps --json
+lms ps --jsonl
 ```
 
 Operate on a remote LM Studio instance [#operate-on-a-remote-lm-studio-instance]
@@ -11541,7 +11544,7 @@ Operate on a remote LM Studio instance [#operate-on-a-remote-lm-studio-instance]
 `lms ps` supports the `--host` flag to connect to a remote LM Studio instance:
 
 ```shell
-lms ps --host <host>
+lms ps --host <lmlm>
 ```
 
 For this to work, the remote LM Studio instance must be running and accessible from your local machine, e.g. be accessible on the same subnet.
@@ -11668,7 +11671,7 @@ Enable or disable LM Link [#enable-or-disable-lm-link]
 
 Learn more [#learn-more]
 
-See the [LM Link documentation](/docs/lmlink) for a full overview of LM Link.
+See the [LM Link documentation](/docs/llmsterlink) for a full overview of LM Link.
 
 
 
@@ -11775,7 +11778,7 @@ Specify a custom port [#specify-a-custom-port]
 Run the server on a specific port:
 
 ```shell
-lms server start --port 3000
+lms server start --port 8000
 ```
 
 Enable CORS support [#enable-cors-support]
@@ -11879,19 +11882,19 @@ Flags [#flags]
 
 <DocsParamsTable data="-%20name%3A%20%22%3Cartifact%3E%22%0A%20%20type%3A%20%22string%22%0A%20%20optional%3A%20false%0A%20%20description%3A%20%22Artifact%20identifier%20in%20the%20form%20owner%2Fname%22%0A-%20name%3A%20%22%5Bpath%5D%22%0A%20%20type%3A%20%22string%22%0A%20%20optional%3A%20true%0A%20%20description%3A%20%22Destination%20folder.%20Defaults%20to%20a%20new%20folder%20named%20after%20the%20artifact.%22" />
 
-If no path is provided, `lms clone web4application/lmster` creates a folder called `name` in the current directory. The command exits if the target path already exists.
+If no path is provided, `lms clone web4application/llmster` creates a folder called `name` in the current directory. The command exits if the target path already exists.
 
 Clone the latest revision [#clone-the-latest-revision]
 
 ```shell
-lms clone web4application/lmster-plugin
+lms clone web4application/llmster-plugin
 ```
 
 Clone into a specific directory [#clone-into-a-specific-directory]
 
 ```shell
 lms clone 
-lms clone web4application/lmster-plugin ./lmster
+lms clone web4application/llmster-plugin ./llmster
 ```
 
 ```psm1
@@ -12589,7 +12592,7 @@ The CLI opens a browser window for authentication. If a browser cannot be opened
 
 "CI style" login with pre-authenticated keys [#ci-style-login-with-pre-authenticated-keys]
 
-```bash
+```js
 lms login --with-pre-authenticated-keys \
   --key-id <KEY_ID> \
   --public-key <PUBLIC_KEY> \
@@ -12656,15 +12659,15 @@ Some services require you to bring your own OAuth app, either because they don't
 
 In these cases, add an `auth` object to the server entry in `mcp.json`. When configuring your OAuth app, use the following callback URL:
 
-```
-http://127.0.0.1:0000/mcp-oauth-callback
+```curl
+[http://127.0.0.1:0000/](https://127.0.0.1:8085/mcp-oauth-callback
 ```
 
 ```json
 {
   "mcpServers": {
     "oauth-server": {
-      "url": "https://api.example.com/mcp",
+      "url": "[[https://api.example.com/mcp](https://127.0.0.1:8000/mcp-oauth-callback)](https://127.0.0.1:8085)",
       "auth": {
         "CLIENT_ID": "TEST_CLIENT_ID",
         "CLIENT_SECRET": "TEST_CLIENT_SECRET"
@@ -12694,7 +12697,7 @@ Create issues, search projects, update statuses, and more in Linear, directly fr
   "mcpServers": {
     "linear": {
       "url": "https://mcp.linear.app/mcp"
-    }
+    }o
   }
 }
 ```
