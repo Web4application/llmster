@@ -1,0 +1,17 @@
+python3 lmlm/runtime/quantization/train.py \
+    --algo-layer ["our"/"baldassi"] \
+    --dataset ["prototypes"/"fmnist"/"cifar10tl"/"imagenettetl"/"cifar100tl"] \
+    --binarize-dataset/--no-binarize-dataset \
+    --test-dim [int] \
+    --layers [str] \
+    --freeze-first/--no-freeze-first \
+    --freeze-last/--no-freeze-last \
+    --group-size [int] \
+    --bs [int] \
+    --epochs [int] \
+    --prob-reinforcement [float] \
+    --rob [float] \
+    --seed [int] \
+    --n-runs [int] \
+    --device [int] \
+    --log/--no-log \
