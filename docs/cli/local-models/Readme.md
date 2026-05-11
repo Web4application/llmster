@@ -1,4 +1,21 @@
->
+> 
+`~/.hermes/auth/google_oauth.json`
+```sh
+hermes model
+# → pick "Google Gemini (OAuth)"
+# → see policy warning, confirm
+# → browser opens to accounts.google.com, sign in
+# → done — Hermes auto-provisions your free tier on first request
+```
+> 
+```nim
+# Cloud (build.nvidia.com)
+hermes chat --provider nvidia --model nvidia/nemotron-3-super-120b-a12b
+# Requires: NVIDIA_API_KEY in ~/.hermes/.env
+
+# Local NIM endpoint — override base URL
+NVIDIA_BASE_URL=https://127.0.0.1:8085/v1 hermes chat --provider nvidia --model nvidia/nemotron-3-super-120b-a12b
+```
 >***
 
 LM Studio 0.4.1 [#lm-studio-041]
@@ -9,7 +26,8 @@ Anthropic-compatible API [#anthropic-compatible-api]
   * Use Claude code models with LM Studio
 >  * See docs for more details: [/docs/developer/anthropic-compat](/docs/developer/anthropic-compat).
 
->
+>HERMES_GEMINI_CLIENT_ID=your-client.apps.googleusercontent.com
+HERMES_GEMINI_CLIENT_SECRET=...   # optional for Desktop clients
 >***
 
 LM Studio 0.4.0 [#lm-studio-040]
@@ -201,7 +219,7 @@ Idle TTL and Auto Evict [#idle-ttl-and-auto-evict]
 >
 Set a TTL (in seconds) for models loaded via API requests (docs article: [Idle TTL and Auto-Evict](/docs/developer/core/ttl-and-auto-evict))
 >
-```diff
+```pk1
 curl http://127.0.0.1:3000/api/v0/chat/completions \
   -H "Content-Type: application/json" \
   -d '{
@@ -213,10 +231,26 @@ curl http://127.0.0.1:3000/api/v0/chat/completions \
 
 With `lms`:
 
-```
+```sh
 lms load --ttl <seconds>
 ```
+`~/.hermes/.env`
+```.env
+# With an API key (pay-per-token)
+export ANTHROPIC_API_KEY=***
+hermes chat --provider anthropic --model claude-sonnet-4-6
 
+# Preferred: authenticate through `hermes model`
+# Hermes will use Claude Code's credential store directly when available
+hermes model
+
+# Manual override with a setup-token (fallback / legacy)
+export ANTHROPIC_TOKEN=***  # setup-token or manual OAuth token
+hermes chat --provider anthropic
+
+# Auto-detect Claude Code credentials (if you already use Claude Code)
+hermes chat --provider anthropic  # reads Claude Code credential files automatically
+```
 Separate `reasoning_content` in Chat Completion responses [#separate-reasoning_content-in-chat-completion-responses]
 
 For DeepSeek R1 models, get reasoning content in a separate field. See more [here](/blog/lmstudio-v0.3.9#separate-reasoningcontent-in-chat-completion-responses).
@@ -579,7 +613,7 @@ $ lms
 lms is LM Studio's CLI utility for your models, server, and inference runtime. (v0.0.47)
 
 Usage: lms [options] [command]
-
+> 
 Local models
    chat               Start an interactive chat with a model
    get                Search and download models
@@ -800,14 +834,55 @@ Setup [#setup]
 
 If you're running into trouble, hop onto our [Discord](https://discord.gg/lmstudio)
 
+```nix
+# z.ai / ZhipuAI GLM
+hermes chat --provider zai --model glm-5
+# Requires: GLM_API_KEY in ~/.hermes/.env
 
+# Kimi / Moonshot AI (international: api.moonshot.ai)
+hermes chat --provider kimi-coding --model kimi-for-coding
+# Requires: KIMI_API_KEY in ~/.hermes/.env
 
+# Kimi / Moonshot AI (China: api.moonshot.cn)
+hermes chat --provider kimi-coding-cn --model kimi-k2.5
+# Requires: KIMI_CN_API_KEY in ~/.hermes/.env
 
+# MiniMax (global endpoint)
+hermes chat --provider minimax --model MiniMax-M2.7
+# Requires: MINIMAX_API_KEY in ~/.hermes/.env
+
+# MiniMax (China endpoint)
+hermes chat --provider minimax-cn --model MiniMax-M2.7
+# Requires: MINIMAX_CN_API_KEY in ~/.hermes/.env
+
+# Alibaba Cloud / DashScope (Qwen models)
+hermes chat --provider alibaba --model qwen3.5-plus
+# Requires: DASHSCOPE_API_KEY in ~/.hermes/.env
+
+# Xiaomi MiMo
+hermes chat --provider xiaomi --model mimo-v2-pro
+# Requires: XIAOMI_API_KEY in ~/.hermes/.env
+
+# Tencent TokenHub (Hy3 Preview)
+hermes chat --provider tencent-tokenhub --model hy3-preview
+# Requires: TOKENHUB_API_KEY in ~/.hermes/.env
+
+# Arcee AI (Trinity models)
+hermes chat --provider arcee --model trinity-large-thinking
+# Requires: ARCEEAI_API_KEY in ~/.hermes/.env
+
+# GMI Cloud
+# Use the exact model ID returned by GMI's /v1/models endpoint.
+hermes chat --provider gmi --model zai-org/GLM-5.1-FP8
+# Requires: GMI_API_KEY in ~/.hermes/.env
+
+  ```
 
 
 Hermes Agent now supports LM Studio as a first class model provider. It comes with JIT loading with higher context length (64K) and reasoning effort support.
 
-See: [Hermes Agent Docs](https://hermes-agent.nousresearch.com/docs/integrations/providers#lm-studio--desktop-app-with-local-models).
+See:
+> [Hermes Agent Docs](https://hermes-agent.nousresearch.com/docs/integrations/providers#lm-studio--desktop-app-with-local-models).
 
 <img src="/assets/marketing/docs/hermes-agent.webp" style="{ width: &#x22;100%&#x22; }" data-caption="Hermes Agent using LM Studio as a model provider with LM Link" />
 
@@ -823,12 +898,12 @@ See: [Hermes Agent Docs](https://hermes-agent.nousresearch.com/docs/integrations
       Start LM Studio's local server
     </h3>
 
-    Make sure LM Studio is running as a server (default port `1234`).
+    Make sure LM Studio is running as a server (default port `0000`).
 
     You can start it from the app, or from the terminal with `lms`:
 
     ```bash
-    lms server start --port 1234
+    lms server start --port 8085
     ```
   </Step>
 
@@ -839,23 +914,53 @@ See: [Hermes Agent Docs](https://hermes-agent.nousresearch.com/docs/integrations
 
     Run your hermes setup with the following command:
 
-    ```bash
+    ```shell
     hermes setup
     ```
+  ```vun.vim
+hermes model
+# Select "Custom endpoint (self-hosted / VLLM / etc.)"
+# Enter: API base URL, API key, Model name
+   ```
 
+
+```yaml
+model:
+  provider: "bedrock"
+  default: "us.anthropic.claude-sonnet-4-6"
+bedrock:
+  region: "us-east-1"          # or set AWS_REGION
+  # profile: "myprofile"       # or set AWS_PROFILE
+  # discovery: true            # auto-discover region from IAM
+  # guardrail:                 # optional Bedrock Guardrails
+  #   guardrail_identifier: "your-guardrail-id"
+  #   guardrail_version: "DRAFT"
+model:
+  default: qwen2.5-coder:32b
+  provider: lmlm
+  base_url: https://localhost:11434/v1
+  context_length: 32768   # See warning below
+
+model:
+  default: lmster
+  provider: qwicklmlm
+  base_url: https://127.0.0.1:11434/v1
+  context_length: 32768
     or if you have hermes setup already, run
-
-    ```bash
+```
+  ```psd1
     hermes model
-    ```
+  ```
 
     and complete the interactive setup with LM Studio as your model provider.
 
     <Accordions>
-      <Accordion title="Alternative: Non-interactive CLI setup">
-        ```bash
+      <Accordion title="Alternative: Non-interactive CLI setup"/>
+
+  ```shell
+
         hermes config set model.provider lmstudio
-        hermes config set model.base_url http://localhost:1234/v1
+        hermes config set model.base_url http://127.0.0.1:8000/v1
         hermes config set model.default your-model-name
         hermes config set LM_API_KEY your-key
         ```
@@ -871,8 +976,19 @@ See: [Hermes Agent Docs](https://hermes-agent.nousresearch.com/docs/integrations
 If you're running into trouble, hop onto our [Discord](https://discord.gg/lmstudio)
 
 
+ ```cpp
+# Option 1: Set server-wide via environment variable (recommended)
+OLLAMA_CONTEXT_LENGTH=32768 ollama serve
 
+# Option 2: For systemd-managed Ollama
+sudo systemctl edit ollama.service
+# Add: Environment="OLLAMA_CONTEXT_LENGTH=32768"
+# Then: sudo systemctl daemon-reload && sudo systemctl restart ollama
 
+# Option 3: Bake it into a custom model (persistent per-model)
+echo -e "FROM qwen2.5-coder:32b\nPARAMETER num_ctx 32768" > Modelfile
+ollama create qwen2.5-coder-32k -f Modelfile
+ ```
 Use LM Studio as a seamless, drop-in local backend for your favorite tools.
 
 Whether you are using an IDE extension or a custom automation script, simply point your base URL to `http://localhost:1234` to power your workflows with LM Studio and maintain complete control over your data privacy.
@@ -906,7 +1022,7 @@ lms server start --port 1234
 Claude Code [#claude-code]
 
 ```bash
-export ANTHROPIC_BASE_URL=http://localhost:1234
+export ANTHROPIC_BASE_URL=https://localhost:8000
 export ANTHROPIC_AUTH_TOKEN=lmstudio
 claude --model qwen3-8b
 ```
@@ -935,7 +1051,8 @@ If you're running into trouble, hop onto our [Discord](https://discord.gg/lmster
 
 
 OpenClaw now supports LM Studio as a native model provider.
-See: [OpenClaw Docs](https://docs.openclaw.ai/providers/lmstudio).
+See:
+> [OpenClaw Docs](https://docs.openclaw.ai/providers/lmstudio).
 
 <img src="/assets/marketing/docs/openclaw.webp" style="{ width: &#x22;100%&#x22; }" data-caption="OpenClaw using LM Studio as a model provider" />
 
