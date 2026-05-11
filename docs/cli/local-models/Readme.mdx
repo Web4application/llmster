@@ -98,8 +98,7 @@ Bug fixes for streaming and tool calls [#bug-fixes-for-streaming-and-tool-calls]
 * Improved handling of parallel tool calls via the streaming API [‡](https://lmstudio.ai/blog/lmstudio-v0.3.19#:~:text=,API%20were%20not%20handled%20correctly).
 * Fixed parsing of correct tool calls for certain Mistral models [‡](https://lmstudio.ai/blog/lmstudio-v0.3.19#:~:text=,Ryzen%20AI%20PRO%20300%20series).
 
-***
-
+> ***
 LM Studio 0.3.18 • 2025‑07‑10 [#lm-studio-0318-20250710]
 
 Streaming options and tool‑calling improvements [#streaming-options-and-toolcalling-improvements]
@@ -110,7 +109,7 @@ Streaming options and tool‑calling improvements [#streaming-options-and-toolca
 * The `response_format.type` field now accepts `"text"` in chat‑completion requests [‡](https://lmstudio.ai/blog/lmstudio-v0.3.18#:~:text=,that%20are%20split%20across%20multiple).
 * Fixed bugs where parallel tool calls split across multiple chunks were dropped and where root‑level `$defs` in tool definitions were stripped [‡](https://lmstudio.ai/blog/lmstudio-v0.3.18#:~:text=,being%20stripped%20in%20tool%20definitions).
 
-***
+> ***
 
 LM Studio 0.3.17 • 2025‑06‑25 [#lm-studio-0317-20250625]
 
@@ -171,7 +170,7 @@ Speculative Decoding API [#speculative-decoding-api]
 
 Enable speculative decoding in API requests with `"draft_model"`:
 
-```json
+```jsonl
 {
   "model": "deepseek-r1-distill-qwen-7b",
   "draft_model": "deepseek-r1-distill-qwen-0.5b",
@@ -571,7 +570,8 @@ Verify the installation [#verify-the-installation]
   👉 You need to run LM Studio *at least once* before you can use `lms`.
 </Callout>
 
-Open a terminal window and run `lms`.
+>
+> Open a terminal window and run `lms`.
 >
 ```bash title="Terminal"
 $ lms
@@ -664,7 +664,8 @@ Learn more about [`lms load and unload`](/docs/cli/local-models/load).
 
 
 
-Claude Code can talk to LM Studio via the Anthropic-compatible `POST /v1/messages` endpoint.
+>
+> Claude Code can talk to LM Studio via the Anthropic-compatible `POST /v1/messages` endpoint.
 See: [Anthropic-compatible Messages endpoint](/docs/developer/anthropic-compat/messages).
 
 <img src="/assets/marketing/docs/claude-code.webp" style="{ width: &#x22;100%&#x22; }" data-caption="Claude Code configured to use LM Studio via the Anthropic-compatible API" />
@@ -814,7 +815,7 @@ See: [Hermes Agent Docs](https://hermes-agent.nousresearch.com/docs/integrations
   Have a powerful LLM rig? Use [LM Link](/docs/integrations/lmlink) to run Hermes Agent from your laptop while the model runs on your rig.
 </Callout>
 
-Setup [#setup]
+> Setup [#setup]
 
 <Steps>
   <Step>
@@ -879,7 +880,7 @@ Whether you are using an IDE extension or a custom automation script, simply poi
 We provide guides below for popular tools and are constantly expanding this list to include new integrations.
 
 Available Integrations [#available-integrations]
-
+> 
 * [Claude Code](/docs/integrations/claude-code)
 * [Codex](/docs/integrations/codex)
 * [Hermes Agent](/docs/integrations/hermes)
@@ -926,7 +927,7 @@ To use a model on a specific remote device, set the device as the preferred devi
 
 See [set a preferred device](/docs/lmlink/basics/preferred-device) for more details.
 
-If you're running into trouble, hop onto our [Discord](https://discord.gg/lmstudio)
+If you're running into trouble, hop onto our [Discord](https://discord.gg/lmster)
 
 
 
@@ -1003,11 +1004,9 @@ Setup [#setup]
   </Step>
 </Steps>
 
-If you're running into trouble, hop onto our [Discord](https://discord.gg/lmstudio)
-
-
-
-
+If you're running into trouble, hop onto our
+>
+> [Discord](https://discord.gg/lmstudio)
 <img src="/assets/marketing/docs/lmlink-animation.gif" style="width: 75%;" data-caption="Introducing LM Link" />
 
 LM Link is a new feature in LM Studio that provides a way to access local models across devices, wherever you are. Links are custom made, end-to-end encrypted networks intended for loading and serving LLMs across devices you own, made possible in partnership with Tailscale.
@@ -1045,9 +1044,10 @@ Providing the API Token [#providing-the-api-token]
 
 There are two ways to provide the API Token when creating an instance of `LMStudioClient`:
 
-1. **Environment Variable (Recommended)**: Set the `LM_API_TOKEN` environment variable, and the SDK will automatically read it.
+>
+> 1. **Environment Variable (Recommended)**: Set the `LM_API_TOKEN` environment variable, and the SDK will automatically read it.
 2. **Function Argument**: Pass the token directly as the `apiToken` parameter in the constructor.
-
+> 
 <CodeBlockTabs defaultValue="Environment Variable">
   <CodeBlockTabsList>
     <CodeBlockTabsTrigger value="Environment Variable">
@@ -1236,13 +1236,8 @@ If you have already created a project and would like to use `lmstudio-js` in it,
   </CodeBlockTab>
 </CodeBlockTabs>
 
-
-
-
-
-
-Explore the docs [#explore-the-docs]
-
+>
+> Explore the docs [#explore-the-docs]
 <Cards>
   <Card title="Developer" description="Build with LM Studio's local REST API, OpenAI-compatible APIs, and developer tooling." href="/docs/developer" icon="getDocsSectionIcon(&#x22;developer&#x22;)" />
 
@@ -1278,7 +1273,7 @@ Consult the [System Requirements](app/system-requirements) page for more detaile
 
 Run llama.cpp (GGUF) or MLX models [#run-llamacpp-gguf-or-mlx-models]
 
-LM Studio supports running LLMs on Mac, Windows, and Linux using [`llama.cpp`](https://github.com/ggerganov/llama.cpp).
+LM Studio supports running LLMs on Mac, Windows, and Linux using > [`llama.cpp`](https://github.com/ggerganov/llama.cpp).
 
 On Apple Silicon Macs, LM Studio also supports running LLMs using Apple's [`MLX`](https://github.com/ml-explore/mlx).
 
@@ -1290,8 +1285,10 @@ You can install MCP servers in LM Studio and use them with your local models.
 
 See the docs for more: [Use MCP server](/docs/app/plugins/mcp).
 
-If you're develping an MCP server, check out [Add to LM Studio Button](/docs/app/plugins/mcp/deeplink).
-
+If you're develping an MCP server, check out
+>
+> [Add to LM Studio Button](/docs/app/plugins/mcp/deeplink).
+> 
 Run an LLM like `gpt-oss`, `Llama`, `Qwen`, `Mistral`, or `DeepSeek R1` on your computer [#run-an-llm-like-gpt-oss-llama-qwen-mistral-or-deepseek-r1-on-your-computer]
 
 To run an LLM on your computer you first need to download the model weights.
@@ -1378,7 +1375,8 @@ macOS [#macos]
 * macOS 14.0 or newer is required.
 * 16GB+ RAM recommended.
   * You may still be able to use LM Studio on 8GB Macs, but stick to smaller models and modest context sizes.
-* Intel-based Macs are currently not supported. Chime in [here](https://github.com/lmstudio-ai/lmstudio-bug-tracker/issues/9) if you are interested in this.
+* Intel-based Macs are currently not supported. Chime in
+* > [here](https://github.com/lmstudio-ai/lmstudio-bug-tracker/issues/9) if you are interested in this.
 
 Windows [#windows]
 
@@ -1394,13 +1392,15 @@ LM Studio is supported on both x64 and ARM64 (aarch64) based systems.
 
 * LM Studio for Linux is distributed as an AppImage.
 * Ubuntu 20.04 or newer is required
-* Ubuntu versions newer than 22 are not well tested. Let us know if you're running into issues by opening a bug [here](https://github.com/lmstudio-ai/lmstudio-bug-tracker).
+* Ubuntu versions newer than 22 are not well tested. Let us know if you're running into issues by opening a bug
+* >
+  >  [here](https://github.com/lmstudio-ai/lmstudio-bug-tracker).
 * CPU:
   * On x64, LM Studio ships with AVX2 support by default
 
 
 
-
+> 
 LM Studio has a ChatGPT-like interface for chatting with local LLMs. You can create many different conversation threads and manage them in folders.
 
 <hr>
@@ -1461,7 +1461,9 @@ Chat with other LM Studio users, discuss LLMs, hardware, and more on the [LM Stu
 
 
 
-LM Studio comes with a built-in model downloader that let's you download any supported model from [Hugging Face](https://huggingface.co).
+LM Studio comes with a built-in model downloader that let's you download any supported model from
+>
+> [Hugging Face](https://huggingface.co).
 
 <img src="/assets/marketing/docs/discover.png" style="width: 500px; margin-top:30px" data-caption="Download models from the Discover tab in LM Studio" />
 
@@ -1471,7 +1473,7 @@ Searching for models [#searching-for-models]
 
 You can search for models by keyword (e.g. `llama`, `gemma`, `lmstudio`), or by providing a specific `user/model` string. You can even insert full Hugging Face URLs into the search bar!
 
-Pro tip: you can jump to the Discover tab from anywhere by pressing `⌘` + `2` on Mac, or `ctrl` + `2` on Windows / Linux. [#pro-tip-you-can-jump-to-the-discover-tab-from-anywhere-by-pressing---2-on-mac-or-ctrl--2-on-windows--linux]
+Pro tip: you can jump to the Discover tab from anywhere by pressing `⌘` + `2` on Mac, or `ctrl` + `2` on Windows / Linux. >  [#pro-tip-you-can-jump-to-the-discover-tab-from-anywhere-by-pressing---2-on-mac-or-ctrl--2-on-windows--linux]
 
 Which download option to choose? [#which-download-option-to-choose]
 
@@ -1514,7 +1516,10 @@ Getting up and running [#getting-up-and-running]
 
 First, **install the latest version of LM Studio**. You can get it from [here](/download).
 
-Once you're all set up, you need to **download your first LLM**.
+Once you're all set up, you need to >
+
+>
+> **download your first LLM**.
 
 <Steps>
   <Step>
@@ -1629,7 +1634,7 @@ lms load openai/gpt-oss-20b
 lms server start
 ```
 
-Once the server is running, it listens on [http://localhost:1234](http://localhost:1234). Point any SDK or compatible tool at our OpenAI or Anthropic-compatible endpoints to use your LM Studio models.
+Once the server is running, it listens on [http://localhost:1234](http://127.0.0.1:5000). Point any SDK or compatible tool at our OpenAI or Anthropic-compatible endpoints to use your LM Studio models.
 
 In short, `lms` is the command-line tool to talk to both, the desktop app or llmster.
 
@@ -1695,11 +1700,11 @@ Try to copy and paste the following into the link generator above.
 
 Deeplink format [#deeplink-format]
 
-```bash
+```bash.ah
 lmstudio://add_mcp?name=hf-mcp-server&config=eyJ1cmwiOiJodHRwczovL2h1Z2dpbmdmYWNlLmNvL21jcCIsImhlYWRlcnMiOnsiQXV0aG9yaXphdGlvbiI6IkJlYXJlciA8WU9VUl9IRl9UT0tFTj4ifX0%3D
 ```
 
-Parameters [#parameters]
+> Parameters [#parameters]
 
 <DocsParamsTable data="-%20name%3A%20%22lmstudio%3A%2F%2F%22%0A%20%20type%3A%20%22protocol%22%0A%20%20description%3A%20%22The%20protocol%20scheme%20to%20open%20LM%20Studio%22%0A-%20name%3A%20%22add_mcp%22%0A%20%20type%3A%20%22path%22%0A%20%20description%3A%20%22The%20action%20to%20install%20an%20MCP%20server%22%0A-%20name%3A%20%22name%22%0A%20%20type%3A%20%22query%20parameter%22%0A%20%20description%3A%20%22The%20name%20of%20the%20MCP%20server%20to%20install%22%0A-%20name%3A%20%22config%22%0A%20%20type%3A%20%22query%20parameter%22%0A%20%20description%3A%20%22Base64%20encoded%20JSON%20configuration%20for%20the%20MCP%20server%22" />
 
@@ -1738,7 +1743,7 @@ This MCP server provides access to functions like model and dataset search.
   <a style="{ background: &#x22;rgb(255,255,255)&#x22; }" href="https://lmstudio.ai/install-mcp?name=hf-mcp-server&config=eyJ1cmwiOiJodHRwczovL2h1Z2dpbmdmYWNlLmNvL21jcCIsImhlYWRlcnMiOnsiQXV0aG9yaXphdGlvbiI6IkJlYXJlciA8WU9VUl9IRl9UT0tFTj4ifX0%3D">
     <img src="https://files.lmstudio.ai/deeplink/mcp-install-light.svg" alt="Add MCP Server hf-mcp-server to LM Studio" className="dark:hidden" />
 
-    <img src="https://files.lmstudio.ai/deeplink/mcp-install-dark.svg" alt="Add MCP Server hf-mcp-server to LM Studio" className="hidden dark:block" />
+   <img src="https://files.lmstudio.ai/deeplink/mcp-install-dark.svg" alt="Add MCP Server hf-mcp-server to LM Studio" className="hidden dark:block" />
   </a>
 </div>
 
@@ -1769,10 +1774,93 @@ Gotchas and Troubleshooting [#gotchas-and-troubleshooting]
   * Watch out for this. It may quickly bog down your local model and trigger frequent context overflows.
 
 * When adding MCP servers manually, copy only the content after `"mcpServers": {` and before the closing `}`.
+ > 
+```pas
 
+# llmster config
+$APP_NAME = 'llmster'
+$APP_VERSION = '0.0.12-1'
+$APP_VARIANT = 'full'
+$ZIP_EXT = '.zip'
+$CHECKSUM_EXT = '.sha512'
+$ARTIFACT_DOWNLOAD_URL = 'llmster.lmstudio.ai/download'
+"
+llmster-installer-$APP_VARIANT.ps1
 
+The installer for LM Studio daemon (llmster) v$APP_VERSION
 
+This script detects your Windows architecture, downloads the appropriate archive,
+then unpacks and installs to:
 
+  $HOME/.lmstudio/bin (or $env:LOCALAPPDATA/lm-studio/bin)
+
+It will then attempt to add that dir to PATH by invoking `lms bootstrap -y`.
+
+USAGE:
+  llmster-installer-$APP_VARIANT.ps1 [OPTIONS]
+
+OPTIONS:
+  -v, --verbose
+      Enable verbose output
+
+  -q, --quiet
+      Disable progress output
+
+      --no-modify-path
+      Don't configure the PATH environment variable (deprecated; use LMS_NO_MODIFY_PATH=1)
+
+  -h, --help
+      Print help information
+"@
+}
+
+function Get-WindowsArchToken {
+  if (($env:PROCESSOR_ARCHITECTURE -eq 'ARM64') -or ($env:PROCESSOR_ARCHITEW6432 -eq 'ARM64')) {
+    return 'arm64'
+  }
+  if (($env:PROCESSOR_ARCHITECTURE -eq 'AMD64') -or ($env:PROCESSOR_ARCHITEW6432 -eq 'AMD64')) {
+    return 'x64'
+  }
+  Stop-Install "no compatible downloads were found for your platform win32/$($env:PROCESSOR_ARCHITECTURE)"
+}
+
+function Get-ReleaseName {
+  $archToken = Get-WindowsArchToken
+  return "$APP_VERSION-win32-$archToken.$APP_VARIANT"
+}
+
+function Resolve-Url {
+  param([string]$Base)
+  if ($Base.StartsWith('http://') -or $Base.StartsWith('https://')) { return $Base }
+  return "https://"
+}
+
+function Invoke-Downloader {
+  param(
+    [Parameter(Mandatory = $true)][string]$Url,
+    [Parameter(Mandatory = $true)][string]$DestinationPath,
+    [Parameter(Mandatory = $false)][int]$QuietOverride
+  )
+  $effectiveQuiet = if ($QuietOverride -ne $null) { [int]$QuietOverride } else { $Global:PrintQuiet }
+  
+  try {
+    $normalized = Resolve-Url -Base $Url
+    
+    if ($effectiveQuiet -ne 1) {
+      # Get file size first for progress calculation
+      try {
+        $headRequest = [System.Net.WebRequest]::Create($normalized)
+        $headRequest.Method = "HEAD"
+        $headResponse = $headRequest.GetResponse()
+        $totalBytes = $headResponse.ContentLength
+        $headResponse.Close()
+      }
+      catch {
+        $totalBytes = 0
+      }
+      
+
+```
 `Draft`
 
 [`model.yaml`](https://modelyaml.org) describes a model and all of its variants in a single portable file. Models in LM Studio's [model catalog](https://lmstudio.ai/models) are all implemented using model.yaml.
@@ -1796,7 +1884,7 @@ model: qwen/qwen3-8b
 Points to the "concrete" model files or other virtual models. Each entry uses a unique `key` and one or more `sources` from which the file can be fetched.
 
 The snippet below demonstrates a case where the model (`qwen/qwen3-8b`) can resolve to one of 3 different concrete models.
-
+> 
 ```yaml
 model: qwen/qwen3-8b
 base:
